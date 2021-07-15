@@ -12,8 +12,9 @@ function App() {
   const [tipos, setTipos] = useState([]);
   const urlAPI = process.env.REACT_APP_URL_API;
   const { cargando, error, fetchEmpepinao } = useFetch(urlAPI);
+  console.log(tipos);
   const nuevoTipo = async (tipo) => {
-    const tipoCreado = await fetchEmpepinao(urlAPI, {
+    const tipoCreado = await fetchEmpepinao(urlAPI + "nuevo-tipo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,15 +26,15 @@ function App() {
     }
   };
   const borrarTipo = async (tipo) => {
-    const respuesta = await fetchEmpepinao(urlAPI + tipo.id, {
+    const respuesta = await fetchEmpepinao(urlAPI + "tipo/" + tipo._id, {
       method: "DELETE",
     });
     if (respuesta) {
-      setTipos(tipos.filter((tipoGato) => tipoGato.id !== tipo.id));
+      setTipos(tipos.filter((tipoGato) => tipoGato._id !== tipo._id));
     }
   };
   const editarTipo = async (tipo) => {
-    const tipoModificado = await fetchEmpepinao(urlAPI + tipo.id, {
+    const tipoModificado = await fetchEmpepinao(urlAPI + "tipo/" + tipo._id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -41,22 +42,11 @@ function App() {
       body: JSON.stringify(tipo),
     });
     if (tipoModificado) {
-      setTipos(
-        tipos.map((tipoGato) => {
-          if (tipoGato.id === tipoModificado.id) {
-            return {
-              ...tipoGato,
-              tipo: tipoModificado.tipo,
-            };
-          } else {
-            return tipoGato;
-          }
-        })
-      );
+      await cargarTipos();
     }
   };
   const cargarTipos = useCallback(async () => {
-    const tiposAPI = await fetchEmpepinao(urlAPI);
+    const tiposAPI = await fetchEmpepinao(urlAPI + "/listado");
     if (tiposAPI) {
       setTipos(tiposAPI);
     }
@@ -78,6 +68,7 @@ function App() {
             nuevoTipo={nuevoTipo}
             editarTipo={editarTipo}
             setFormularioAbierto={setFormularioAbierto}
+            cargarTipos={cargarTipos}
           />
         ) : (
           <Listado
