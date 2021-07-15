@@ -12,7 +12,6 @@ function App() {
   const [tipos, setTipos] = useState([]);
   const urlAPI = process.env.REACT_APP_URL_API;
   const { cargando, error, fetchEmpepinao } = useFetch(urlAPI);
-  console.log(tipos);
   const nuevoTipo = async (tipo) => {
     const tipoCreado = await fetchEmpepinao(urlAPI + "nuevo-tipo", {
       method: "POST",
