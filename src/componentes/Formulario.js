@@ -6,7 +6,7 @@ import { Button, Col, Form } from "react-bootstrap";
 export const Formulario = (props) => {
   const { formularioAbierto, setFormularioAbierto, nuevoTipo, editarTipo } =
     props;
-  const editando = !!formularioAbierto.id;
+  const editando = !!formularioAbierto._id;
   const [tipo, setTipo] = useState(editando ? formularioAbierto.tipo : "");
   const textoBoton = editando ? "Editar" : "Crear";
   const elementoInput = useRef(null);
@@ -16,11 +16,11 @@ export const Formulario = (props) => {
   const setDato = (e) => {
     setTipo(e.target.value);
   };
-  const guardaTipo = (e) => {
+  const guardaTipo = async (e) => {
     e.preventDefault();
     if (editando) {
       editarTipo({
-        id: formularioAbierto.id,
+        _id: formularioAbierto._id,
         tipo,
       });
     } else {

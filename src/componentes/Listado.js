@@ -16,7 +16,7 @@ export const Listado = (props) => {
       <Col xs="12" as="ul" className="listado list-unstyled">
         {tipos.map((tipo) => (
           <Item
-            key={tipo.id}
+            key={tipo._id}
             tipo={tipo}
             borrarTipo={borrarTipo}
             setFormularioAbierto={setFormularioAbierto}
