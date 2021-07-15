@@ -60,7 +60,7 @@ function App() {
     if (tiposAPI) {
       setTipos(tiposAPI);
     }
-  }, [fetchEmpepinao]);
+  }, [fetchEmpepinao, urlAPI]);
 
   useEffect(() => {
     cargarTipos();
