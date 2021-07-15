@@ -1,0 +1,33 @@
+.listado {
+  margin-top: 20px;
+}
+.contenedor-spinner {
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 20px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #09d;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  color: #f00;
+  font-size: 1.8em;
+}
